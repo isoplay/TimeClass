@@ -14,116 +14,97 @@
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css'>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.css'>
   <link rel="stylesheet" href="./dist/css/adminlte.min.css">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
 
 </head>
 
 <body class="hold-transition">
 
   <!-- Navbar -->
-  <div class="nav">
-    <input type="checkbox" id="nav-check">
-    <div class="nav-header">
-      <div class="nav-title">
-        JoGeek
-      </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">TimeClass</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="whatsapp-link-aqui">Suporte por WhatsApp</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sobre</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="../index.html">Sair</a>
+        </li>
+      </ul>
     </div>
-    <div class="nav-btn">
-      <label for="nav-check">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-    </div>
-    
-    <div class="nav-links">
-      <a href="//github.io/jo_geek" target="_blank">Github</a>
-      <a href="http://stackoverflow.com/users/4084003/" target="_blank">Stackoverflow</a>
-      <a href="https://in.linkedin.com/in/jonesvinothjoseph" target="_blank">LinkedIn</a>
-      <a href="https://codepen.io/jo_Geek/" target="_blank">Codepen</a>
-      <a href="https://jsfiddle.net/user/jo_Geek/" target="_blank">JsFiddle</a>
-    </div>
-  </div>
+  </nav>
   <!-- Main content -->
   <section class="content">
     <div class="container mt-4">
       <div class="row">
-        <!-- Imagem 1 -->
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Informatica</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 1"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Multiuso</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Projeto De Vida</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Linguagens</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Fisica</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Sala de Quimica</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-6 mb-4">
-          <div class="card">
-            <h5>Chromebooks</h5>
-            <img src="./adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem 2"
-              onclick="showModal('A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.', 'Sala de Informatica')">
-          </div>
-        </div>
-        <!-- Adicione mais imagens com a mesma estrutura e função onclick conforme necessário -->
-      </div>
+        <!-- Loop para gerar as imagens -->
+        <script>
+          const imagens = [
+            "Sala de Informatica",
+            "Sala de Multiuso",
+            "Sala de Projeto De Vida",
+            "Sala de Linguagens",
+            "Sala de Fisica",
+            "Sala de Quimica",
+            "Chromebooks"
+          ];
 
-      <!-- Modal -->
-      <div class="modal" id="myModal">
-        <div class="modal-content">
-          <span class="close" onclick="closeModal()">&times;</span>
-          <h2 id="modalName"></h2>
-          <p id="modalDescription"></p>
-          <button class="btn btn-primary">Reservar</button>
-          <button class="btn btn-secondary">Ver Reservas</button>
-        </div>
-      </div>
-      <!-- Script JavaScript para o modal -->
-      <script>
-        function showModal(description, name) {
-          document.getElementById('modalDescription').innerText = description;
-          document.getElementById('modalName').innerText = name;
-          document.getElementById('myModal').style.display = 'block';
-        }
+          const descricao = "A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.";
 
-        function closeModal() {
-          document.getElementById('myModal').style.display = 'none';
-        }
-      </script>
+          for (let i = 0; i < imagens.length; i++) {
+            const imagemNum = i + 1;
+            document.write(`
+              <div class="col-md-4 col-sm-6 mb-4">
+                <div class="card">
+                  <h5>${imagens[i]}</h5>
+                  <img src="/adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem ${imagemNum}"
+                    onclick="showModal('${descricao}', '${imagens[i]}')">
+                </div>
+              </div>
+            `);
+          }
+        </script>
+      </div>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div class="modal" id="myModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalName"></h2>
+      <p id="modalDescription"></p>
+      <button class="btn btn-primary">Reservar</button>
+      <button class="btn btn-secondary">Ver Reservas</button>
+    </div>
+  </div>
+
+  <!-- Script JavaScript para o modal -->
+  <script>
+    function showModal(description, name) {
+      document.getElementById('modalDescription').innerText = description;
+      document.getElementById('modalName').innerText = name;
+      document.getElementById('myModal').style.display = 'block';
+    }
+
+    function closeModal() {
+      document.getElementById('myModal').style.display = 'none';
+    }
+  </script>
 
   <footer class="main-footer">
     <strong>Copyright &copy; 2023 <a href="#">João Bley</a>Todos os direitos reservados.</strong>
