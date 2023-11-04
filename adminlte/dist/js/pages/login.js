@@ -70,7 +70,7 @@ function login(event) {
     .catch(handleError);
 }
 
-function autenticarUsuario(token, email, userId) {
+async function autenticarUsuario(token, email, userId) {
   const url = 'https://api-agendamendo-jb.wesleybrum.repl.co/auth-auto';
 
   const data = {
@@ -94,7 +94,7 @@ function autenticarUsuario(token, email, userId) {
     })
     .then(data => {
       console.log("Autenticação bem-sucedida", data);
-      window.location = "./adminlte/blank.html";
+      window.location.href = "./adminlte/blank.html";
     })
     .catch(handleError);
 }
@@ -102,3 +102,4 @@ function autenticarUsuario(token, email, userId) {
 function handleError(error) {
   console.error(error);
 }
+ 
