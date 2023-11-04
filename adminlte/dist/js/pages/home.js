@@ -14,7 +14,7 @@ function getFromLocalStorage(key) {
     const token = getFromLocalStorage('token');
     if (token) {
       setInLocalStorage('token', ''); // Remova o token do localStorage
-      window.location.href = "../index.html"; // Redirecione para a página de índice
+      window.location.href = "../index.html"; // Redirecione para a página de índic
     }
    
   }

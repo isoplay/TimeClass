@@ -82,40 +82,13 @@
     <p>&copy; 2023 João Bley</p>
   </footer>
 
-  <script>
-    function togglePasswordVisibility() {
-      var passwordField = document.getElementById("password");
-      var passwordIcon = document.getElementById("passwordIcon");
-
-      if (passwordField.type === "password") {
-        passwordField.type = "text";
-        passwordIcon.classList.remove("fa-eye");
-        passwordIcon.classList.add("fa-eye-slash");
-      } else {
-        passwordField.type = "password";
-        passwordIcon.classList.remove("fa-eye-slash");
-        passwordIcon.classList.add("fa-eye");
-      }
-    }
-
-    function validateAndSubmit() {
-      const fullname = document.getElementById("fullname").value;
-      const password = document.getElementById("password").value;
-  
-      if (!fullname || !password) {
-        console.log("Preencha todos os campos antes de solicitar.");
-      } else {
-        window.location.href = "/adminlte/validar.html";
-      }
-    }
-  </script>
-
   <!-- jQuery -->
   <script src="./plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap 4 -->
   <script src="./plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
   <!-- AdminLTE App -->
   <script src="./dist/js/adminlte.min.js"></script>
+  <script src="./dist/js/pages/cadastro.js"></script>
 </body>
 
 </html>
