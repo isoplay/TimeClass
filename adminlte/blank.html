@@ -17,99 +17,136 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <script src="./dist/js/pages/home.js"></script>
+
+  <style>
+    #btn_card_btn{
+      color: aliceblue;
+    }
+  </style>
 
 
 </head>
 
-<body class="hold-transition">
+<body class="hold-transition" style="background-color:#2c3338;">
 
   <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">TimeClass</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="whatsapp-link-aqui">Suporte por WhatsApp</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sobre</a>
-        </li>
-        <li class="nav-item">
-          <a type="submit" class="nav-link" onclick="sair()">Sair</a>
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #2c3338;">
+  <a class="navbar-brand" href="#" style="color: aliceblue;">TimeClass</a>
+  <button class="navbar-toggler" type="button" style="background-color: aliceblue;" data-toggle="collapse" data-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon" style="color: aliceblue;"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="whatsapp-link-aqui" style="color: aliceblue;">Suporte por WhatsApp</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" style="color: aliceblue;">Sobre</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="../index.html" style="color: aliceblue;">Sair</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-        </li>
-      </ul>
-    </div>
-  </nav>
   <!-- Main content -->
   <section class="content">
     <div class="container mt-4">
       <div class="row">
-        <!-- Loop para gerar as imagens -->
-        <script>
-          const imagens = [
-            "Sala de Informatica",
-            "Sala de Multiuso",
-            "Sala de Projeto De Vida",
-            "Sala de Linguagens",
-            "Sala de Fisica",
-            "Sala de Quimica",
-            "Chromebooks"
-          ];
-
-          const descricao = "A sala de informática é um ambiente dinâmico que pode ser usado para uma variedade de atividades, desde pesquisa na web até programação, edição de mídia e aprendizado de habilidades tecnológicas. Ela desempenha um papel importante na preparação dos alunos para o mundo digital em constante evolução e ajuda a integrar a tecnologia no currículo educacional de forma eficaz.";
-
-          for (let i = 0; i < imagens.length; i++) {
-            const imagemNum = i + 1;
-            document.write(`
-              <div class="col-md-4 col-sm-6 mb-4">
-                <div class="card">
-                  <h5>${imagens[i]}</h5>
-                  <img src="/adminlte/img/sala_inf.png" class="card-img-top" alt="Imagem ${imagemNum}"
-                    onclick="showModal('${descricao}', '${imagens[i]}')">
-                </div>
+        <ul class="cards">
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=10"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn" >Fazer Reserva</button>
               </div>
-            `);
-          }
-        </script>
-      </div>
-    </div>
-  </section>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=5"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn">Fazer Reserva</button>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=11"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn">Fazer Reserva</button>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=14"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn">Fazer Reserva</button>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=17"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn">Fazer Reserva</button>
+              </div>
+            </div>
+          </li>
+          <li class="cards_item">
+            <div class="card">
+              <div class="card_image"><img src="https://picsum.photos/500/300/?image=2"></div>
+              <div class="card_content">
+                <h2 class="card_title">Card Grid Layout</h2>
+                <p class="card_text">Demo of pixel perfect pure CSS simple responsive card grid layout</p>
+                <button class="btn card_btn">Fazer Reserva</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>      
 
-  <!-- Modal -->
-  <div class="modal" id="myModal">
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 id="modalName"></h2>
-      <p id="modalDescription"></p>
-      <button class="btn btn-primary">Reservar</button>
-      <button class="btn btn-secondary">Ver Reservas</button>
-    </div>
-  </div>
-
-  <!-- Script JavaScript para o modal -->
-  <script>
-    function showModal(description, name) {
-      document.getElementById('modalDescription').innerText = description;
-      document.getElementById('modalName').innerText = name;
-      document.getElementById('myModal').style.display = 'block';
-    }
-
-    function closeModal() {
-      document.getElementById('myModal').style.display = 'none';
-    }
-  </script>
-
-  <footer class="main-footer">
+  <footer class="main-footer" style="background-color:#2c3338;" >
     <strong>Copyright &copy; 2023 <a href="#">João Bley</a>Todos os direitos reservados.</strong>
   </footer>
+
+  <script>
+    $(document).ready(function() {
+      // Seletor para o botão do menu da navbar
+      var $navbarToggle = $('.navbar-toggler');
+      
+      // Seletor para a área de navegação da navbar
+      var $navbarNav = $('#navbarNav');
+      
+      // Adiciona um evento de clique ao botão do menu
+      $navbarToggle.click(function() {
+        // Verifica se a área de navegação está visível
+        if ($navbarNav.is(':visible')) {
+          // Se estiver visível, esconde a área de navegação
+          $navbarNav.slideUp();
+        } else {
+          // Caso contrário, mostra a área de navegação
+          $navbarNav.slideDown();
+        }
+      });
+    });
+    </script>
 
   <!-- jQuery -->
   <script src="./plugins/jquery/jquery.min.js"></script>
