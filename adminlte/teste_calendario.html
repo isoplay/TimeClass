@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Agendamento de Horários</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .calendario {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .mes-seletor,
+        .dias {
+            display: flex;
+            overflow-x: auto;
+            margin-bottom: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .horario-disponivel {
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .horario-ocupado {
+            background-color: red;
+            color: white;
+            cursor: pointer;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: #fff;
+            z-index: 1000;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .modal label,
+        .modal textarea,
+        .modal input {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .modal button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .modal button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Agendamento de Horários</h1>
+
+    <div class="calendario">
+        <div class="mes-seletor">
+            <select id="mesSelecionado" onchange="mudarMes(this.value)">
+                <option value="0">Janeiro</option>
+                <option value="1">Fevereiro</option>
+                <option value="2">Março</option>
+                <option value="3">Abril</option>
+                <option value="4">Maio</option>
+                <option value="5">Junho</option>
+                <option value="6">Julho</option>
+                <option value="7">Agosto</option>
+                <option value="8">Setembro</option>
+                <option value="9">Outubro</option>
+                <option value="10">Novembro</option>
+                <option value="11">Dezembro</option>
+            </select>
+        </div>
+
+        <div class="dias">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>13:10</th>
+                        <th>14:00</th>
+                        <th>14:50</th>
+                        <th>15:40</th>
+                        <th>16:30</th>
+                        <th>17:20</th>
+                        <th>18:10</th>
+                        <th>19:00</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaDias">
+                    <!-- Os dias e horários serão preenchidos dinamicamente aqui -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h5 class="modal-title">Agendamento de Horário</h5>
+            </div>
+            <div class="modal-body">
+                <form action="" method="post">
+                    <div class="form-group">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horarioInicio">Horário de Início:</label>
+                        <input type="text" id="horarioInicio" class="form-control" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horarioFim">Horário de Fim:</label>
+                        <input type="text" id="horarioFim" class="form-control" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <label for="materia">Matéria:</label>
+                        <input type="text" id="materia" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="motivo">Motivo:</label>
+                        <textarea id="motivo" class="form-control" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="salvarHorario()">Salvar</button>
+                <button type="button" class="btn btn-secondary" onclick="fecharModal()">Fechar</button>
+            </div>
+        </div>
+
+        <script>
+            var horariosOcupados = {};
+
+            function mudarMes(mes) {
+                atualizarTabelaDias();
+            }
+
+            function atualizarTabelaDias() {
+                var tabelaDias = document.getElementById('tabelaDias');
+                tabelaDias.innerHTML = '';
+                for (var i = 1; i <= 31; i++) {
+                    var tr = document.createElement('tr');
+                    var tdDia = document.createElement('td');
+                    tdDia.textContent = i;
+                    tr.appendChild(tdDia);
+                    for (var j = 0; j < 8; j++) {
+                        var tdHorario = document.createElement('td');
+                        tdHorario.textContent = "13:10";
+                        tdHorario.classList.add('horario-disponivel');
+                        tdHorario.onclick = function () {
+                            abrirModal(this);
+                        };
+                        tr.appendChild(tdHorario);
+                    }
+                    tabelaDias.appendChild(tr);
+                }
+            }
+
+            function abrirModal(elementoHorario) {
+                var modal = document.getElementById('modal');
+                var horarioInicio = elementoHorario.textContent;
+                var horarioFim = calcularHorarioFim(horarioInicio);
+
+                document.getElementById('horarioInicio').value = horarioInicio;
+                document.getElementById('horarioFim').value = horarioFim;
+
+                modal.style.display = 'block';
+
+                // Verifica se o horário está ocupado
+                if (horariosOcupados[elementoHorario.parentElement.firstChild.textContent] &&
+                    horariosOcupados[elementoHorario.parentElement.firstChild.textContent].includes(horarioInicio)) {
+                    elementoHorario.classList.remove('horario-disponivel');
+                    elementoHorario.classList.add('horario-ocupado');
+                }
+            }
+
+            function calcularHorarioFim(horarioInicio) {
+                var inicio = new Date('2023-01-01 ' + horarioInicio);
+                var fim = new Date(inicio.getTime() + 50 * 60000);
+                return formatarHorario(fim);
+            }
+
+            function formatarHorario(data) {
+                var horas = data.getHours();
+                var minutos = data.getMinutes();
+                return (horas < 10 ? '0' : '') + horas + ':' + (minutos < 10 ? '0' : '') + minutos;
+            }
+
+            function fecharModal() {
+                var modal = document.getElementById('modal');
+                modal.style.display = 'none';
+            }
+
+            function salvarHorario() {
+                var nome = document.getElementById('nome').value;
+                var horarioInicio = document.getElementById('horarioInicio').value;
+                var horarioFim = document.getElementById('horarioFim').value;
+                var materia = document.getElementById('materia').value;
+                var motivo = document.getElementById('motivo').value;
+
+                var horario = {
+                    nome: nome,
+                    horarioInicio: horarioInicio,
+                    horarioFim: horarioFim,
+                    materia: materia,
+                    motivo: motivo
+                };
+
+                if (!horariosOcupados[horarioInicio]) {
+                    horariosOcupados[horarioInicio] = [];
+                }
+                horariosOcupados[horarioInicio].push(horarioInicio);
+
+                console.log("Horário salvo:", horario);
+
+                fecharModal();
+            }
+        </script>
+    </div>
+</body>
+
+</html>
