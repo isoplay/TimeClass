@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="teste1.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Monthly Calendar</title>
+</head>
+<body>
+
+<div class="calendar-container">
+    <div class="month-selector">
+        <label for="month">Select Month:</label>
+        <select id="month">
+            <option value="0">January</option>
+            <option value="1">February</option>
+            <!-- ... Add other months ... -->
+            <option value="11">December</option>
+        </select>
+    </div>
+
+    <table class="calendar">
+        <thead>
+            <!-- Days of the week -->
+            <tr>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+            </tr>
+        </thead>
+        <tbody id="calendar-body">
+            <!-- Calendar content will be dynamically generated here -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal for adding information -->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject">
+        <label for="time">Time:</label>
+        <input type="text" id="time" readonly>
+        <button id="saveBtn">Save</button>
+    </div>
+</div>
+
+<script src="teste1.js"></script>
+</body>
+</html>
