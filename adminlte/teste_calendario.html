@@ -96,6 +96,7 @@
             background-color: #45a049;
         }
     </style>
+
 </head>
 
 <body>
@@ -105,19 +106,31 @@
     <div class="calendario">
         <div class="mes-seletor">
             <select id="mesSelecionado" onchange="mudarMes(this.value)">
-                <option value="0">Janeiro</option>
-                <option value="1">Fevereiro</option>
-                <option value="2">Março</option>
-                <option value="3">Abril</option>
-                <option value="4">Maio</option>
-                <option value="5">Junho</option>
-                <option value="6">Julho</option>
-                <option value="7">Agosto</option>
-                <option value="8">Setembro</option>
-                <option value="9">Outubro</option>
-                <option value="10">Novembro</option>
-                <option value="11">Dezembro</option>
+                <option value="1">Janeiro</option>
+                <option value="2">Fevereiro</option>
+                <option value="3">Março</option>
+                <option value="4">Abril</option>
+                <option value="5">Maio</option>
+                <option value="6">Junho</option>
+                <option value="7">Julho</option>
+                <option value="8">Agosto</option>
+                <option value="9">Setembro</option>
+                <option value="10">Outubro</option>
+                <option value="11">Novembro</option>
+                <option value="12">Dezembro</option>
+
             </select>
+            <!-- <br>
+            <label for="year"></label><select class="form-control col-sm-4" name="year" id="year" onchange="jump()">
+                <option value=2023>2023</option>
+                <option value=2024>2024</option>
+                <option value=2025>2025</option>
+                <option value=2026>2026</option>
+                <option value=2027>2027</option>
+                <option value=2028>2028</option>
+                <option value=2029>2029</option>
+                <option value=2030>2030</option>
+            </select></form> -->
         </div>
 
         <div class="dias">
@@ -125,14 +138,14 @@
                 <thead>
                     <tr>
                         <th></th>
-                        <th>13:10</th>
-                        <th>14:00</th>
-                        <th>14:50</th>
-                        <th>15:40</th>
-                        <th>16:30</th>
-                        <th>17:20</th>
-                        <th>18:10</th>
-                        <th>19:00</th>
+                        <th>1-AULA</th>
+                        <th>2-AULA</th>
+                        <th>3-AULA</th>
+                        <th>4-AULA</th>
+                        <th>RECREIO</th>
+                        <th>5-AULA</th>
+                        <th>6-AULA</th>
+                        <th>7-AULA</th>
                     </tr>
                 </thead>
                 <tbody id="tabelaDias">
@@ -170,99 +183,299 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" onclick="salvarHorario()">Salvar</button>
+                <button type="button" class="btn btn-primary" id="SalvarAgen">Salvar</button>
                 <button type="button" class="btn btn-secondary" onclick="fecharModal()">Fechar</button>
             </div>
         </div>
-
+  <script src="./dist/js/pages/calendario.js"></script>
         <script>
-            var horariosOcupados = {};
+ 
+ 
+    function guarda_reserva(valor) {
+  // Recupera os horários ocupados existentes do localStorage
+  var horariosOcupadosJson = localStorage.getItem('HorariosOcupados');
+  
+  // Verifica se já existem horários ocupados
+  var horariosOcupados = horariosOcupadosJson ? JSON.parse(horariosOcupadosJson) : [];
 
-            function mudarMes(mes) {
-                atualizarTabelaDias();
+  // Adiciona o novo valor à lista
+  horariosOcupados.push(valor);
+
+  // Converte a lista para JSON e salva no localStorage
+  localStorage.setItem('HorariosOcupados', JSON.stringify(horariosOcupados));
+}
+
+function removerUltimos4Caracteres(str) {
+    return str.substring(0, str.length - 4);
+}
+
+function mudarMes(mes) {
+    atualizarTabelaDias(mes);
+    horario_reservados()
+}
+
+function atualizarTabelaDias(receberMes) {
+
+    var tabelaDias = document.getElementById('tabelaDias');
+    tabelaDias.innerHTML = '';
+    var Mes = receberMes;
+
+    for (var i = 1; i <= 31; i++) {
+        var tr = document.createElement('tr');
+        var tdDia = document.createElement('td');
+        tdDia.textContent = i;
+        tr.appendChild(tdDia);
+
+        // Configurar horário inicial para 13:50
+        var hora = 13;
+        var minuto = 10;
+
+        for (var j = 0; j < 8; j++) {
+            var tdHorario = document.createElement('td');
+
+            // Adicionar zero à esquerda se o minuto for menor que 10
+            var strMinuto = minuto < 10 ? '0' + minuto : minuto;
+            var idDia = 'd0' + i;
+            if(i>9){
+            idDia = 'd' + i
             }
 
-            function atualizarTabelaDias() {
-                var tabelaDias = document.getElementById('tabelaDias');
-                tabelaDias.innerHTML = '';
-                for (var i = 1; i <= 31; i++) {
-                    var tr = document.createElement('tr');
-                    var tdDia = document.createElement('td');
-                    tdDia.textContent = i;
-                    tr.appendChild(tdDia);
-                    for (var j = 0; j < 8; j++) {
-                        var tdHorario = document.createElement('td');
-                        tdHorario.textContent = "13:10";
-                        tdHorario.classList.add('horario-disponivel');
-                        tdHorario.onclick = function () {
-                            abrirModal(this);
-                        };
-                        tr.appendChild(tdHorario);
-                    }
-                    tabelaDias.appendChild(tr);
-                }
+            var idHora = 'h' + hora + strMinuto;
+            var idMess = 'm0' + Mes
+            if(Mes>9){
+                idMess = 'm' + idMess
             }
 
-            function abrirModal(elementoHorario) {
-                var modal = document.getElementById('modal');
-                var horarioInicio = elementoHorario.textContent;
-                var horarioFim = calcularHorarioFim(horarioInicio);
+            // Adicionar ID à célula
+            tdHorario.setAttribute('id', idMess + idDia + idHora);
+            tdHorario.setAttribute('mes', Mes); // Adicionar atributo 'mes'
 
-                document.getElementById('horarioInicio').value = horarioInicio;
-                document.getElementById('horarioFim').value = horarioFim;
-
-                modal.style.display = 'block';
-
-                // Verifica se o horário está ocupado
-                if (horariosOcupados[elementoHorario.parentElement.firstChild.textContent] &&
-                    horariosOcupados[elementoHorario.parentElement.firstChild.textContent].includes(horarioInicio)) {
-                    elementoHorario.classList.remove('horario-disponivel');
-                    elementoHorario.classList.add('horario-ocupado');
-                }
-            }
-
-            function calcularHorarioFim(horarioInicio) {
-                var inicio = new Date('2023-01-01 ' + horarioInicio);
-                var fim = new Date(inicio.getTime() + 50 * 60000);
-                return formatarHorario(fim);
-            }
-
-            function formatarHorario(data) {
-                var horas = data.getHours();
-                var minutos = data.getMinutes();
-                return (horas < 10 ? '0' : '') + horas + ':' + (minutos < 10 ? '0' : '') + minutos;
-            }
-
-            function fecharModal() {
-                var modal = document.getElementById('modal');
-                modal.style.display = 'none';
-            }
-
-            function salvarHorario() {
-                var nome = document.getElementById('nome').value;
-                var horarioInicio = document.getElementById('horarioInicio').value;
-                var horarioFim = document.getElementById('horarioFim').value;
-                var materia = document.getElementById('materia').value;
-                var motivo = document.getElementById('motivo').value;
-
-                var horario = {
-                    nome: nome,
-                    horarioInicio: horarioInicio,
-                    horarioFim: horarioFim,
-                    materia: materia,
-                    motivo: motivo
+            // Verificar se é 16:30 e deixar vazio
+            if (hora === 16 && minuto === 30) {
+                tdHorario.textContent = 's/n';
+            } else {
+                tdHorario.textContent = hora + ':' + strMinuto;
+                tdHorario.classList.add('horario-disponivel');
+                tdHorario.onclick = function () {
+                    abrirModal(this);
                 };
-
-                if (!horariosOcupados[horarioInicio]) {
-                    horariosOcupados[horarioInicio] = [];
-                }
-                horariosOcupados[horarioInicio].push(horarioInicio);
-
-                console.log("Horário salvo:", horario);
-
-                fecharModal();
             }
+
+            tr.appendChild(tdHorario);
+
+            // Incrementar 50 minutos
+            minuto += 50;
+            if (minuto >= 60) {
+                minuto -= 60;
+                hora++;
+            }
+        }
+        tabelaDias.appendChild(tr);
+    }
+    horario_reservados()
+}
+
+// Exemplo de uso
+atualizarTabelaDias();
+
+function abrirModal(elementoHorario) {
+// var mes = minhaData.getMonth() + 1;
+// var dia = minhaData.getDate();
+
+    var salvar = document.getElementById('SalvarAgen');
+    var modal = document.getElementById('modal');
+    var horarioInicio = elementoHorario.textContent;
+    var mes = elementoHorario.getAttribute('mes'); // Correção aqui
+    var idDia = elementoHorario.parentElement.firstChild.textContent;
+    var horarioFim = calcularHorarioFim(horarioInicio);
+    var idTd = elementoHorario.id
+    console.log(idDia);
+    console.log(mes);
+    console.log(idTd) // Correção aqui
+
+    document.getElementById('horarioInicio').value = horarioInicio;
+    document.getElementById('horarioFim').value = horarioFim;
+
+    modal.style.display = 'block';
+
+   
+    
+    salvar.onclick = function () {
+                    salvarHorario(2023,mes,idDia,idTd);
+                };
+}
+
+function calcularHorarioFim(horarioInicio) {
+    var inicio = new Date('2023-01-01 ' + horarioInicio);
+    var fim = new Date(inicio.getTime() + 50 * 60000);
+    return formatarHorario(fim);
+}
+
+function formatarHorario(data) {
+    var horas = data.getHours();
+    var minutos = data.getMinutes();
+    return (horas < 10 ? '0' : '') + horas + ':' + (minutos < 10 ? '0' : '') + minutos;
+}
+
+function fecharModal() {
+    var modal = document.getElementById('modal');
+    modal.style.display = 'none';
+}
+
+function criarData(ano, mes, dia) {
+
+    var data = new Date(ano, mes, dia, 0, 0, 0, 0);
+
+    // Formatação da data para o formato desejado (ano-mês-diaThora:minuto:segundo.000Z)
+    var dataFormatada = data.toISOString().split('T')[0] + 'T00:00:00.000Z';
+
+    return dataFormatada;
+}
+document.addEventListener("DOMContentLoaded", function() {
+    horario_reservados();
+});
+
+function horario_reservados() {
+    let agendamentos = [];
+
+    const url = 'https://api-agendamendo-jb.wesleybrum.repl.co/agendamentos';
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                console.error('Erro na requisição:', response.statusText);
+                throw new Error('Erro na requisição');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Autenticação bem-sucedida", data);
+            if (data && data.length > 0) {
+                // Adiciona agendamentos ao array agendamentos
+                agendamentos = data;
+
+                // Verificar se há horários ocupados
+                agendamentos.forEach(agendamento => {
+                    const dataAgendamento = new Date(agendamento.data_do_agendamento);
+                    const mes = dataAgendamento.getMonth();
+                    const dia = dataAgendamento.getDate();
+                    const hora = agendamento.hora_entrada.replace(/:/g, '');
+                    
+                    let agendamentoString = [];
+                    if(mes>9){
+                         agendamentoString = `m${mes}d${dia}h${hora}`;
+                    }
+                    else{
+                         agendamentoString = `m0${mes}d${dia}h${hora}`;
+                    }
+
+                    console.log(agendamentoString)
+                    // Obter o elemento pelo ID
+                    const elemento = document.getElementById(agendamentoString);
+
+                    // Verificar se o elemento foi encontrado
+                    if (elemento) {
+                        console.log("deu")
+                        // Mudar a cor de fundo conforme desejado
+                        elemento.style.backgroundColor = "red";
+                        // Ou qualquer outra manipulação desejada
+                    }
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro durante a requisição:', error.message);
+            // Adicione tratamento de erro adicional, se necessário
+        });
+}
+
+
+// salvar agendamento
+function salvarHorario(ano, mes, dia, idTd) {
+    var nome = document.getElementById('nome').value;
+    var horarioInicio = document.getElementById('horarioInicio').value;
+    var horarioFim = document.getElementById('horarioFim').value;
+    var materia = document.getElementById('materia').value;
+    var motivo = document.getElementById('motivo').value;
+    var id_professor = localStorage.getItem("userId");
+    var data_agendamento = criarData(ano, mes, dia);
+    console.log(data_agendamento);
+
+    // Validar entrada
+    if (!nome || !horarioInicio || !horarioFim || !materia || !motivo || !id_professor || !data_agendamento) {
+        console.log('Preencha todos os campos obrigatórios');
+        return;
+    }
+
+    const token = getFromLocalStorage('token'); // Certifique-se de que você tenha a função getFromLocalStorage definida
+
+    const url = 'https://api-agendamendo-jb.wesleybrum.repl.co/agendamentos';
+
+    const data = {
+        nome_do_professor: nome,
+        id_sala: 1, // id da sala tenho que manipular ainda
+        id_prof: id_professor,
+        data_do_agendamento: data_agendamento,
+        descricao_do_uso: motivo,
+        hora_entrada: horarioInicio,
+        hora_saida: horarioFim
+    };
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                console.log('Erro na requisição');
+                throw new Error('Erro na requisição');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Autenticação bem-sucedida", data);
+            // guarda_reserva(idTd)
+            horario_reservados()
+            // window.location.href = "./adminlte/blank.html";
+        })
+        .catch(error => {
+            console.error('Erro durante a requisição:', error);
+            handleError(error); // Se você tiver uma função handleError definida
+        });
+
+    // var horario = {
+    //     nome: nome,
+    //     horarioInicio: horarioInicio,
+    //     horarioFim: horarioFim,
+    //     materia: materia,
+    //     motivo: motivo
+    // };
+
+    // if (!horariosOcupados[horarioInicio]) {
+    //     horariosOcupados[horarioInicio] = [];
+    // }
+    // horariosOcupados[horarioInicio].push(horarioInicio);
+
+    // console.log("Horário salvo:", horario);
+
+    fecharModal();
+}
+
+function getFromLocalStorage(key) {
+    return localStorage.getItem(key);
+}
+
+function handleError(error) {
+    console.error(error);
+}
+
+
         </script>
+
     </div>
 </body>
 

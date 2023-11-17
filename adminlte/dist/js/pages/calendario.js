@@ -59,18 +59,3 @@ async function autenticarUsuario(token, email, userId) {
 function handleError(error) {
   console.error(error);
 }
-
-  
-  function sair() {
-    const token = getFromLocalStorage('token');
-    if (token) {
-      setInLocalStorage('token',''); // Remova o token do localStorage
-      window.location.href = "../index.html"; // Redirecione para a página de índic
-    }
-   
-  }
-
-  function irPageCalendario(){
-    window.location.href = "./teste_calendario.html"
-  }
-  

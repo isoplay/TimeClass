@@ -9,6 +9,9 @@ function checkLocalStorageAndAuthenticate() {
   if (token && remember === 'true') {
     autenticarUsuario(token, email, userId);
   }
+  else {
+    localStorage.removeItem(key);
+  }
 }
 
 function getFromLocalStorage(key) {
@@ -30,7 +33,7 @@ function login(event) {
   const receberSenha = document.getElementById('login__password').value;
   const lembre_se = document.getElementById('remember');
 
-  const url = 'https://api-agendamendo-jb.wesleybrum.repl.co/login';
+  const url = 'https://wesley-brum-api-time-class-jb.onrender.com/login';
   const data = {
     email: receberEmail,
     senha: receberSenha
